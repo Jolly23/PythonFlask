@@ -11,4 +11,4 @@ da_dir = '/root/PythonFlask'
 def flask():
     with cd(da_dir):
         local('git pull origin master')
-        local('python PythonFlask')
+        local('python PythonFlask.py')
