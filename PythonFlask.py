@@ -33,7 +33,7 @@ def projects():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    abort(401)
+    abort(401)  # 401 禁止访问
     if request.method == 'POST':
         return u'登录成功!'
     else:
