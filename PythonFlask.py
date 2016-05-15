@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, url_for, render_template, request, redirect, abort
+from flask import Flask, url_for, render_template, request, redirect, abort, session, escape
 
 app = Flask(__name__)
 
@@ -10,8 +10,10 @@ def page_not_found(error):
 
 
 @app.route('/')
-def hello_world():
-    return redirect(url_for('show_user_profile', username='Jolly'))
+def index():
+    if 'username' in session:
+        return 'Logged in as %s' % escape(session['username'])
+    return 'You are not logged in'
 
 
 @app.route('/hello/')
@@ -33,13 +35,27 @@ def projects():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    abort(401)  # 401 禁止访问
     if request.method == 'POST':
-        return u'登录成功!'
-    else:
-        return u'准备登陆!'
+        session['username'] = request.form['username']
+        return redirect(url_for('index'))
+    return '''
+        <div align="center">
+            <form action="" method="post">
+                <p><input type=text name=username>
+                <p><input type=submit value=Login>
+            </form>
+        </div>
+    '''
+
+
+@app.route('/logout')
+def logout():
+    # 如果会话中有用户名就删除它。
+    session.pop('username', None)
+    return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
+    app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
     app.debug = True
     app.run(host='0.0.0.0', port=5000)
