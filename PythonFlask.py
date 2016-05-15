@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, url_for, render_template, request, redirect
+from flask import Flask, url_for, render_template, request, redirect, abort
 
 app = Flask(__name__)
 
@@ -33,6 +33,7 @@ def projects():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    abort(401)
     if request.method == 'POST':
         return u'登录成功!'
     else:
