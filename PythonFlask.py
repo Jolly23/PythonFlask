@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, url_for, render_template, request
+from flask import Flask, url_for, render_template, request, redirect
 
 app = Flask(__name__)
 
@@ -11,7 +11,7 @@ def page_not_found(error):
 
 @app.route('/')
 def hello_world():
-    return url_for('show_user_profile', username='Jolly')
+    return redirect(url_for('show_user_profile', username='Jolly'))
 
 
 @app.route('/hello/')
