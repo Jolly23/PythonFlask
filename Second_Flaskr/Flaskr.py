@@ -3,6 +3,7 @@ import os
 import sqlite3
 from contextlib import closing
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
+from config import *
 from flask.ext.sqlalchemy import SQLAlchemy
 
 # configuration
@@ -18,6 +19,18 @@ PASSWORD = 'admin'
 app = Flask(__name__)
 app.config.from_object(__name__)
 # app.config.from_envvar('FLASKR_SETTINGS', silent=True)
+
+
+if app.debug:
+    import logging
+    from logging.handlers import SMTPHandler
+    mail_handler = SMTPHandler(mailhost=MAIL_HOST,
+                               fromaddr=FROM_ADDR,
+                               toaddrs=ADMINS,
+                               subject=SUBJECT,
+                               credentials=CREDENTIALS)
+    mail_handler.setLevel(logging.DEBUG)
+    app.logger.addHandler(mail_handler)
 
 
 def connect_db():
