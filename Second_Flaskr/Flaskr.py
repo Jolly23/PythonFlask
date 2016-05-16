@@ -24,13 +24,36 @@ app.config.from_object(__name__)
 if app.debug:
     import logging
     from logging.handlers import SMTPHandler
+    from logging import Formatter
     mail_handler = SMTPHandler(mailhost=MAIL_HOST,
                                fromaddr=FROM_ADDR,
                                toaddrs=ADMINS,
                                subject=SUBJECT,
                                credentials=CREDENTIALS)
+    mail_handler.setFormatter(Formatter('''
+                        Message type:       %(levelname)s
+                        Location:           %(pathname)s:%(lineno)d
+                        Module:             %(module)s
+                        Function:           %(funcName)s
+                        Time:               %(asctime)s
+
+                        Message:
+
+                        %(message)s
+                        '''))
     mail_handler.setLevel(logging.DEBUG)
     app.logger.addHandler(mail_handler)
+
+    # import logging
+    from logging.handlers import RotatingFileHandler
+
+    file_handler = RotatingFileHandler('flaskr_logs', maxBytes=1024)
+    file_handler.setFormatter(Formatter(
+        '%(asctime)s %(levelname)s: %(message)s '
+        '[in %(pathname)s:%(lineno)d]'
+        ))
+    file_handler.setLevel(logging.DEBUG)
+    app.logger.addHandler(file_handler)
 
 
 def connect_db():
