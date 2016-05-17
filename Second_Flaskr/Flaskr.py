@@ -3,8 +3,6 @@
 import sqlite3
 from contextlib import closing
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
-# from config import *
-from flask.ext.sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
@@ -111,6 +109,6 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=app.config['SERVER_PORT'])
 
 

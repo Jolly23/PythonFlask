@@ -4,6 +4,7 @@ import os
 # configuration
 basedir = os.path.abspath(os.path.dirname(__file__))
 DATABASE = os.path.join(basedir, 'flaskr.db')
+SERVER_PORT = 18909
 DEBUG = True
 SECRET_KEY = 'development key'
 USERNAME = 'admin'
