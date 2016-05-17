@@ -21,7 +21,7 @@ app.config.from_object(__name__)
 # app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
 
-if 1 == 1:
+if app.debug:
     import logging
     from logging.handlers import SMTPHandler
     from logging import Formatter
