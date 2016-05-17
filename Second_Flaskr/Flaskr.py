@@ -9,10 +9,9 @@ from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config.from_object('config')
-# app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
 
-if app.debug:
+if not app.debug:
     import logging
     from logging.handlers import SMTPHandler
     from logging import Formatter
