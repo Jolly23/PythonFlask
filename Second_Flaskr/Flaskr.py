@@ -21,7 +21,7 @@ app.config.from_object(__name__)
 # app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
 
-if app.debug:
+if 1 == 1:
     import logging
     from logging.handlers import SMTPHandler
     from logging import Formatter
@@ -117,7 +117,7 @@ def login():
 def logout():
     session.pop('logged_in', None)
     flash('You were logged out')
-    return redirect(url_for('show_entries'))
+    return redirect(url_for('s@how_entries'))
 
 
 if __name__ == '__main__':
