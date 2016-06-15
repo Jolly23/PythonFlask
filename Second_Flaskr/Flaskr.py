@@ -4,7 +4,7 @@ import sqlite3
 from contextlib import closing
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
 import os
-from werkzeug import secure_filename
+from werkzeug import secure_filename, SharedDataMiddleware
 from flask import send_from_directory
 
 app = Flask(__name__)
@@ -12,6 +12,11 @@ app.config.from_object('config')
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'JPG'])
 
+app.add_url_rule('/uploads/<filename>', 'uploaded_file',
+                 build_only=True)
+app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {
+    '/uploads': app.config['UPLOAD_FOLDER']
+})
 
 if not app.debug:
     import logging
