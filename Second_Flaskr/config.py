@@ -17,4 +17,3 @@ SUBJECT = 'YourApplication Failed'
 CREDENTIALS = ('lionel_lei@163.com', '*')
 
 UPLOAD_FOLDER = '/root/PythonFlask/Second_Flaskr/tmp'
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
