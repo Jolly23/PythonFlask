@@ -10,7 +10,7 @@ from flask import send_from_directory
 app = Flask(__name__)
 app.config.from_object('config')
 
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'JPG'])
 
 
 if not app.debug:
