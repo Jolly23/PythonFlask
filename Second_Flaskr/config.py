@@ -12,7 +12,7 @@ PASSWORD = 'admin'
 
 MAIL_HOST = 'applesmtp.163.com'
 FROM_ADDR = 'server-error@example.com'
-ADMINS = ['pilot_lei@foxmail.com']  # To address
+ADMINS = ['pilot_lei@foxmail.com']
 SUBJECT = 'YourApplication Failed'
 CREDENTIALS = ('lionel_lei@163.com', '*')
 
